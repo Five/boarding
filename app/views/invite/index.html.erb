@@ -12,55 +12,68 @@
   <!-- End Google Analytics -->
 <% end %>
 
-<div class="container" style="text-align: center; max-width: 350px; padding-top: 20px;">
-  <% if @metadata[:icon_url] %>
-    <%= image_tag @metadata[:icon_url], class: "appIcon", style: "margin-bottom: 30px;" %>
-  <% else %>
-    <div style="margin-bottom: 20px"></div>
-  <% end %>
+<div class="fixed-width-container">
+    
+    <div class="gif">
+        <%= image_tag("statice.png", size: "190x338") %>
+    </div>
 
+    <div style= "text-align: center" >
+        <%= image_tag("phone.svg", size: "260x502") %>
+    </div>
 
+    <div class="gif">
+        <%= image_tag("upvoting.gif", size: "190x338") %>
+    </div>
 
-  <% unless @message %>
-    <h4 class="" style="margin-bottom: 40px;"><%= @metadata[:title] %></h4>
+    <div style= "text-align: center" >
+        <%= image_tag("phone.svg", size: "260x502") %>
+    </div>
 
-    <%= form_tag("/submit", method: "post", style: "text-align: left") do %>
-      <%= label_tag(:first_name, t(:first_name_label)) %>
-      <%= text_field_tag :first_name, '', class: "form-control", placeholder: t(:first_name_placeholder) %><br />
-      <%= label_tag(:last_name, t(:last_name_label)) %>
-      <%= text_field_tag :last_name, '', class: "form-control", placeholder: t(:last_name_placeholder) %><br />
-      <%= label_tag(:email, t(:email_label), class: "required") %>
-      <%= email_field_tag :email, '', class: "form-control", placeholder: t(:email_placeholder) %><br />
+    <div class="gif">
+    <%= image_tag("dongers.gif", size: "190x338") %>
+    </div>
 
-      <% if ENV["ITC_TOKEN"] %>
-        <% if params[:token] %>
-          <%= hidden_field_tag :token, '', value: params[:token] %>
-        <% else %>
-          <%= label_tag(:token, t(:password_label)) %>
-          <%= text_field_tag :token, '', class: "form-control", placeholder: t(:password_placeholder) %><br />
-        <% end %>
-      <% end %>
+    <div style= "text-align: center" >
+        <%= image_tag("phone.svg", size: "260x502") %>
+    </div>
 
-      <br />
-      <%= submit_tag t(:get_beta_access), class: 'btn btn-lg btn-primary btn-block', id: "submit" %>
-    <% end %>
-  <% else %>
-    <p class="alert alert-<%= @type %>">
-      <%= @message %>
-    </p>
-  <% end %>
+    <div class="gif">
+    <%= image_tag("feed_scroll.gif", size: "190x338") %>
+    </div>
+
+    <div style= "text-align: center" >
+        <%= image_tag("phone.svg", size: "260x502") %>
+    </div>
+
+    <div class="signup">
+        <div class="landing-container-group">
+            <div class="landing-container landing-container__email">
+                <!-- submit form -->
+                <!-- TODO: add error pages or alerts -->
+                <%= form_tag("/submit", method: "post", style: "text-align: left") do %>
+                    <label class="input__top-label">
+                        <span>Sign up for the beta (.edu only)</span>
+                        <br>
+                            <!-- this is the token which is passed in the URL string -->
+                            <!-- TODO: should we have another version w/ a password field? -->
+                            <% if ENV["ITC_TOKEN"] %>
+                              <% if params[:token] %>
+                                <%= hidden_field_tag :token, '', value: params[:token] %>
+                              <% else %>
+                                <!-- <%= label_tag(:token, t(:password_label)) %> -->
+                                <!-- <%= text_field_tag :token, '', class: "form-control", placeholder: t(:password_placeholder) %><br /> -->
+                              <% end %>
+                            <% end %>
+                            <%= email_field_tag :email, '', class: "input landing-container__email-field", placeholder: "University email address" %><br />
+                    </label>
+                    <div class="landing-container__wrapper">
+                        <div class="landing-container__success-label"></div>
+                        <%= submit_tag t(:get_beta_access), class: 'landing-container__btn-submit c-btn c-btn--wide c-btn--action c-btn--shadow', id: "Get the app" %>
+                    </div>
+                <% end %>
+                <div class="landing-container__spacer landing-container__btn-form-feedback"></div>
+            </div>
+        </div>
+    </div>  
 </div>
-
-<style type="text/css">
-  .appIcon {
-    -webkit-border-radius: 22.544%;
-       -moz-border-radius: 22.544%;
-        -ms-border-radius: 22.544%;
-            border-radius: 22.544%;
-
-    width: 256px;
-  }
-  #submit {
-    margin-bottom: 20px;
-  }
-</style>
