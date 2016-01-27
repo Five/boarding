@@ -49,30 +49,36 @@
     <div class="signup">
         <div class="landing-container-group">
             <div class="landing-container landing-container__email">
-                <!-- submit form -->
-                <!-- TODO: add error pages or alerts -->
-                <%= form_tag("/submit", method: "post", style: "text-align: left") do %>
-                    <label class="input__top-label">
-                        <span>Sign up for the beta (.edu only)</span>
-                        <br>
-                            <!-- this is the token which is passed in the URL string -->
-                            <!-- TODO: should we have another version w/ a password field? -->
-                            <% if ENV["ITC_TOKEN"] %>
-                              <% if params[:token] %>
-                                <%= hidden_field_tag :token, '', value: params[:token] %>
-                              <% else %>
-                                <!-- <%= label_tag(:token, t(:password_label)) %> -->
-                                <!-- <%= text_field_tag :token, '', class: "form-control", placeholder: t(:password_placeholder) %><br /> -->
-                              <% end %>
-                            <% end %>
-                            <%= email_field_tag :email, '', class: "input landing-container__email-field", placeholder: "University email address" %><br />
-                    </label>
-                    <div class="landing-container__wrapper">
-                        <div class="landing-container__success-label"></div>
-                        <%= submit_tag t(:get_beta_access), class: 'landing-container__btn-submit c-btn c-btn--wide c-btn--action c-btn--shadow', id: "Get the app" %>
-                    </div>
+                <% unless @message %>
+                    <!-- submit form -->
+                    <!-- TODO: add error pages or alerts -->
+                    <%= form_tag("/submit", method: "post", style: "text-align: left") do %>
+                        <label class="input__top-label">
+                            <span>Sign up for the beta (.edu only)</span>
+                            <br>
+                                <!-- this is the token which is passed in the URL string -->
+                                <!-- TODO: should we have another version w/ a password field? -->
+                                <% if ENV["ITC_TOKEN"] %>
+                                  <% if params[:token] %>
+                                    <%= hidden_field_tag :token, '', value: params[:token] %>
+                                  <% else %>
+                                    <!-- <%= label_tag(:token, t(:password_label)) %> -->
+                                    <!-- <%= text_field_tag :token, '', class: "form-control", placeholder: t(:password_placeholder) %><br /> -->
+                                  <% end %>
+                                <% end %>
+                                <%= email_field_tag :email, '', class: "input landing-container__email-field", placeholder: "University email address" %><br />
+                        </label>
+                        <div class="landing-container__wrapper">
+                            <div class="landing-container__success-label"></div>
+                            <%= submit_tag t(:get_beta_access), class: 'landing-container__btn-submit c-btn c-btn--wide c-btn--action c-btn--shadow', id: "Get the app" %>
+                        </div>
+                    <% end %>
+                    <div class="landing-container__spacer landing-container__btn-form-feedback"></div>
+                <% else %>
+                    <p class="alert alert-<%= @type %>">
+                        <%= @message %>
+                    </p>
                 <% end %>
-                <div class="landing-container__spacer landing-container__btn-form-feedback"></div>
             </div>
         </div>
     </div>  
