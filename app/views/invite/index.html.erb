@@ -13,43 +13,42 @@
 <% end %>
 
 <div class="fixed-width-container">
-    
-    <div class="gif">
-        <%= image_tag("statice.png", size: "190x338") %>
-    </div>
+    <% unless @message %>
+        <div class="gif">
+            <%= image_tag("statice.png", size: "190x338") %>
+        </div>
 
-    <div style= "text-align: center" >
-        <%= image_tag("phone.svg", size: "260x502") %>
-    </div>
+        <div style= "text-align: center" >
+            <%= image_tag("phone.svg", size: "260x502") %>
+        </div>
 
-    <div class="gif">
-        <%= image_tag("upvoting.gif", size: "190x338") %>
-    </div>
+        <div class="gif">
+            <%= image_tag("upvoting.gif", size: "190x338") %>
+        </div>
 
-    <div style= "text-align: center" >
-        <%= image_tag("phone.svg", size: "260x502") %>
-    </div>
+        <div style= "text-align: center" >
+            <%= image_tag("phone.svg", size: "260x502") %>
+        </div>
 
-    <div class="gif">
-    <%= image_tag("dongers.gif", size: "190x338") %>
-    </div>
+        <div class="gif">
+        <%= image_tag("dongers.gif", size: "190x338") %>
+        </div>
 
-    <div style= "text-align: center" >
-        <%= image_tag("phone.svg", size: "260x502") %>
-    </div>
+        <div style= "text-align: center" >
+            <%= image_tag("phone.svg", size: "260x502") %>
+        </div>
 
-    <div class="gif">
-    <%= image_tag("feed_scroll.gif", size: "190x338") %>
-    </div>
+        <div class="gif">
+        <%= image_tag("feed_scroll.gif", size: "190x338") %>
+        </div>
 
-    <div style= "text-align: center" >
-        <%= image_tag("phone.svg", size: "260x502") %>
-    </div>
+        <div style= "text-align: center" >
+            <%= image_tag("phone.svg", size: "260x502") %>
+        </div>
 
-    <div class="signup">
-        <div class="landing-container-group">
-            <div class="landing-container landing-container__email">
-                <% unless @message %>
+        <div class="signup">
+            <div class="landing-container-group">
+                <div class="landing-container landing-container__email">
                     <!-- submit form -->
                     <!-- TODO: add error pages or alerts -->
                     <%= form_tag("/submit", method: "post", style: "text-align: left") do %>
@@ -74,12 +73,17 @@
                         </div>
                     <% end %>
                     <div class="landing-container__spacer landing-container__btn-form-feedback"></div>
-                <% else %>
-                    <p class="alert alert-<%= @type %>">
-                        <%= @message %>
-                    </p>
-                <% end %>
+                </div>
             </div>
+        </div>  
+    <% else %>
+        <div class="message">
+            <% if @image %>
+                <%= image_tag(@image, size: "120x120") %>
+            <% end %>
+            <p class="alert alert-<%= @type %>">
+                <%= @message %>
+            </p>  
         </div>
-    </div>  
+    <% end %>
 </div>

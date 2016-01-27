@@ -23,7 +23,7 @@ class InviteController < ApplicationController
     if ENV["RESTRICTED_TLD"]
       if email.split(".").last != ENV["RESTRICTED_TLD"]
         @message = "Sorry! Early access is currently restricted to people with .#{ENV["RESTRICTED_TLD"]} emails."
-        @type = "warning"
+        @type = "danger"
         render :index
         return
       end
@@ -32,7 +32,7 @@ class InviteController < ApplicationController
     if ENV["RESTRICTED_DOMAIN"]
       if email.split("@").last != ENV["RESTRICTED_DOMAIN"]
         @message = "Sorry! Early access is currently restricted to people within the #{ENV["RESTRICTED_DOMAIN"]} domain."
-        @type = "warning"
+        @type = "danger"
         render :index
         return
       end
@@ -81,7 +81,8 @@ class InviteController < ApplicationController
       end
 
       if testing_is_live?
-        @message = t(:message_success_live)
+        @image = "check-email.svg"
+        @message = "You're in! Check your email. We've sent you the download link."
       else
         @message = t(:message_success_pending)
       end
@@ -158,7 +159,7 @@ class InviteController < ApplicationController
     def check_disabled_text
       if ENV["ITC_CLOSED_TEXT"]
         @message = ENV["ITC_CLOSED_TEXT"]
-        @type = "warning"
+        @type = "danger"
       end
     end
 
