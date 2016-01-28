@@ -52,14 +52,14 @@
                     <!-- submit form -->
                     <%= form_tag("/submit", method: "post", style: "text-align: left") do %>
                         <label class="input__top-label">
-                            <span>Sign up for the beta (.edu only)</span>
+                            <span>Sign up for the beta</span>
                             <br>
                                 <% if ENV["ITC_TOKEN"] %>
                                   <% if params[:token] %>
                                     <%= hidden_field_tag :token, '', value: params[:token] %>
                                   <% end %>
                                 <% end %>
-                                <%= email_field_tag :email, '', class: "input landing-container__email-field", placeholder: "University email address" %><br />
+                                <%= email_field_tag :email, '', class: "input landing-container__email-field", placeholder: "email address" %><br />
                         </label>
                         <div class="landing-container__wrapper">
                             <div class="landing-container__success-label"></div>
